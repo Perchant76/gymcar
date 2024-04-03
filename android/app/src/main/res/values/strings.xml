@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">gymcar</string>
+    <string name="title_activity_main">gymcar</string>
+    <string name="package_name">com.gymcar.pro</string>
+    <string name="custom_url_scheme">com.gymcar.pro</string>
+</resources>
