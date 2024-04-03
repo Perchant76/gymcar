@@ -192,7 +192,6 @@
   <br>
   <br>
   <p class="flex justify-center text-gray-500">Made with 💚 by Gymcar</p>
-  
   <br>
   {:else if $driver == '1'}
   <img src="/" alt="">
@@ -253,7 +252,7 @@
         <br>
         <br>
         <p class="flex text-gray-600 justify-center">Made with 💚 by Gymcar</p>
-        <div class="flex justify-center text-gray-600">
+        <div class=" flex justify-center text-lime-700 text-xl rounded py-2">
           <button on:click={logOut}>Log Out</button>
         </div>
         <br>
@@ -306,7 +305,7 @@
           <br>
           <br>
           <p class="flex justify-center text-gray-700">Made with 💚 by Gymcar</p>
-          <div class="flex justify-center text-gray-600">
+          <div class=" flex justify-center text-lime-700 text-xl rounded py-2">
             <button on:click={logOut}>Log Out</button>
           </div>
 
