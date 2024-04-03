@@ -256,6 +256,7 @@
           <button on:click={logOut}>Log Out</button>
         </div>
         <br>
+        <br>
     </form>
     {/await}
   {:else if $driver == '0'}
@@ -308,6 +309,8 @@
           <div class=" flex justify-center text-lime-700 text-xl rounded py-2">
             <button on:click={logOut}>Log Out</button>
           </div>
+          <br>
+          <br>
 
       {:catch error }
         <p>Error fetching passengers: {error.message}</p>
