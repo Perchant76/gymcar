@@ -1,5 +1,5 @@
 <script>
-  
+    import "../app.css";
   import { onMount } from 'svelte';
   // @ts-ignore
   import Cookies from 'js-cookie'; // For URL encoding
@@ -144,56 +144,142 @@
 </script>
 
 {#if $token == '' }
-  <h2>Login</h2>
-  <form on:submit|preventDefault={handleLogin}>
-    <input name="username" type="text" bind:value={username} placeholder="Username" />
-    <input name="password" type="password" bind:value={password} placeholder="Password" />
-    <button type="submit">Login</button>
+  <br>
+  <br>
+  <br>
+    <div class="flex justify-center ">
+    <img class="w-28" src="/logo.png" alt="Logo">
+  </div>
+  <br>
+  <br>
+  <br>
+  <h1 class="text-5xl flex justify-center text-white">GYMCAR</h1>
+  <br>
+  <br>
+  <br>
+  <h2 class="flex justify-center text-4xl text-white">Login</h2>
+  <br>
+  <br>
+  <br>
+  <form class="flex flex-col px-44" on:submit|preventDefault={handleLogin}>
+    <input class="mt-1 px-3 py-4 bg-black border text-white shadow-sm border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 block w-full rounded-md sm:text-sm focus:ring-1" name="username" type="text" bind:value={username} placeholder="Username" />
+    <br>
+    <br>
+    <br>
+    <input class="mt-1 px-3 py-4 bg-black border shadow-sm text-white border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 block w-full rounded-md sm:text-sm focus:ring-1" name="password" type="password" bind:value={password} placeholder="Password" />
+    <br>
+    <br>
+    <br>
+    <button class="text-white bg-lime-700 rounded px-3 py-1 flex justify-center" type="submit">Login</button>
   </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p class="flex justify-center text-gray-500">Made with 💚 by Gymcar</p>
   {:else if $driver == '1'}
-  <h2>Welcome </h2>
-    <h3>Set Times</h3>
+  <img src="/" alt="">
+  <br>
+  <br>
+    <div class="flex justify-center ">
+    <img class="w-20" src="/logo.png" alt="Logo">
+  </div>
+  <h1 class="flex text-white justify-center text-5xl py-5">Vitaj Vodič </h1>
+  <br>
+    <h3 class="flex text-white justify-center text-4xl">Nastav čas</h3>
+    <br>
+    <br>
+    <p class="flex  text-white justify-center px-5">V tejto časti ku každej zastávke cez ktorú prechádzaš pridaj čas, počas ktorého budeš prechádzať cez toto miesto</p>
+    <br>
     {#await getTimes()}
       <p>Loading</p>
     {:then stations } 
+    <br>
+    <br>
+    <br>
     <form on:submit|preventDefault={setTimes}>
       {#each stations.stations as station, i}
-        <label for={"selectTime"+ i}>{station}</label>
-        <select id={"selectTime"+i} name={i +'_'+ station} >
-          <option value="7:00">7:00</option>
-          <option value="7:10">7:10</option>
-          <option value="7:20">7:20</option>
-          <option selected value="7:30">7:30</option>
-          <option value="7:40">7:40</option>
-          <option value="7:50">7:50</option>
-          <option value="8:00">8:00</option>
-        </select>
+        <ul class="flex  justify-center text-3xl">
+          <label class=" text-white px-3" for={"selectTime"+ i}>{station}</label>
+          <select id={"selectTime"+i} name={i +'_'+ station} >
+            <option value="6:00">6:00</option>
+            <option value="6:10">6:10</option>
+            <option value="6:20">6:20</option>
+            <option value="6:30">6:30</option>
+            <option value="6:40">6:40</option>
+            <option value="6:50">6:50</option>
+            <option value="7:00">7:00</option>
+            <option value="7:10">7:10</option>
+            <option value="7:20">7:20</option>
+            <option value="7:20">7:20</option>
+            <option value="7:30">7:20</option>
+            <option value="7:40">7:20</option>
+            <option value="7:50">7:20</option>
+            <option value="8:00">7:20</option>
+            <option value="8:10">7:20</option>
+            <option value="8:20">7:20</option>
+            <option value="8:30">7:20</option>
+            <option value="8:40">7:20</option>
+            <option value="8:50">7:20</option>
+            <option value="9:00">7:20</option>
+          </select>
+        </ul>
+        <br>
         {/each}
-        <button type="submit" >
-          Submit Times
-        </button>
+        <br>
+        <dir class="flex justify-center" >
+          <button class="text-white bg-lime-700 rounded px-3 py-1 text-2xl" type="submit" >
+            Submit Times
+          </button>
+        </dir>
+        <br>
+        <br>
+        <br>
+        <p class="flex text-gray-600 justify-center">Made with 💚 by Gymcar</p>
+        <br>
     </form>
     {/await}
   {:else if $driver == '0'}
-    <h3>Set Passenger</h3>
+  <br>
+  <br>
+  <br>
+  <br>
+    <div class="flex justify-center ">
+    <img class="w-20" src="/logo.png" alt="Logo">
+  </div>
+  <br>
+    <h1 class="flex  text-white justify-center text-5xl">Vyber si auto</h1>
     {#if $incar == '1'}
-      <p>You are already in car</p>
-      <h2>{$times}</h2>
+      <h1 class="flex justify-center">Tvoje auto bude na zastávke o:</h1>
+      <h2 class="flex justify-center">{$times}</h2>
       {:else}
 
     <ul>
       {#await getPassengers()}
-        <p>Loading passengers...</p>
+        <p class="flex justify-center text-7xl text-white">Loading passengers...</p>
       {:then passengers }
-        <h1>{$home}</h1>
+      <br>
+      <br>
+        <h1 class="flex text-white justify-center text-3xl">{$home}</h1>
+        <p class="flex text-white justify-center">Tu si môžeš vybrať ktorým autom pôjdeš na základe času, ktorý ti vyhovuje, šoferá spoznáš podľa ŠPZ</p>
+        <br>
           {#each passengers as passenger }
-            <li>
+            <li class="flex text-white justify-center text-3xl py-6 px-5">
               {passenger.spz} - {passenger.time}
-              <button on:click={() => setPassengers(passenger.spz, passenger.time)}>
-                Select
+              <button class="bg-lime-700 text-white rounded px-3 py-1" on:click={() => setPassengers(passenger.spz, passenger.time)}>
+                Vybrať
               </button>
             </li>
+            <br>
           {/each}
+          <br>
+          <br>
+          <br>
+          <br>
+          <p class="flex justify-center text-gray-700">Made with 💚 by Gymcar</p>
+
       {:catch error }
         <p>Error fetching passengers: {error.message}</p>
       {/await}
