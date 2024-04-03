@@ -179,6 +179,7 @@
   <br>
   <br>
   <p class="flex justify-center text-gray-500">Made with 💚 by Gymcar</p>
+  <br>
   {:else if $driver == '1'}
   <img src="/" alt="">
   <br>
