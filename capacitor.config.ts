@@ -3,7 +3,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.gymcar.pro',
   appName: 'gymcar',
-  webDir: 'www',
+  webDir: 'build',
   server: {
     androidScheme: 'https'
   }
