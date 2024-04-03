@@ -161,7 +161,7 @@
   <br>
   <br>
   <br>
-  <form class="flex flex-col px-44" on:submit|preventDefault={handleLogin}>
+  <form class="flex flex-col px-10 sm:px-96" on:submit|preventDefault={handleLogin}>
     <input class="mt-1 px-3 py-4 bg-black border text-white shadow-sm border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 block w-full rounded-md sm:text-sm focus:ring-1" name="username" type="text" bind:value={username} placeholder="Username" />
     <br>
     <br>
