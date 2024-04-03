@@ -109,6 +109,10 @@
     console.log(data.stations);
     return  data
   };
+  async function remPassenger(){
+    incar.set('0');
+    times.set('');
+  }
 
   // @ts-ignore
   async function setPassengers(spz, time) {
@@ -253,8 +257,12 @@
   <br>
     <h1 class="flex  text-white justify-center text-5xl">Vyber si auto</h1>
     {#if $incar == '1'}
-      <h1 class="flex justify-center">Tvoje auto bude na zastávke o:</h1>
-      <h2 class="flex justify-center">{$times}</h2>
+    <br>
+      <h1 class="flex justify-center text-2xl text-white">Tvoje auto bude na zastávke o:</h1>
+      <h2 class="flex justify-center text-white text-5xl">{$times}</h2>
+      <button class="bg-lime-700 flex justify-center text-white rounded px-3 py-1" on:click={() => remPassenger()}>
+        Nechcem odviesť
+      </button>
       {:else}
 
     <ul>
