@@ -259,10 +259,15 @@
     {#if $incar == '1'}
     <br>
       <h1 class="flex justify-center text-2xl text-white">Tvoje auto bude na zastávke o:</h1>
-      <h2 class="flex justify-center text-white text-5xl">{$times}</h2>
-      <button class="bg-lime-700 flex justify-center text-white rounded px-3 py-1" on:click={() => remPassenger()}>
-        Nechcem odviesť
-      </button>
+      <br>
+      <h2 class="flex justify-center text-white text-7xl">{$times}</h2>
+      <br>
+      <br>
+      <div class="flex justify-center">
+        <button class="bg-lime-700 text-white rounded px-3 py-1" on:click={() => remPassenger()}>
+          Nechcem odviesť
+        </button>
+      </div>
       {:else}
 
     <ul>
