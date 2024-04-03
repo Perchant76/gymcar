@@ -113,7 +113,13 @@
     incar.set('0');
     times.set('');
   }
-
+  async function logOut(){
+    home.set('')
+    token.set('')
+    spz.set('')
+    route.set('')
+    driver.set('')
+  }
   // @ts-ignore
   async function setPassengers(spz, time) {
     const data = { spz: spz, token: $token };
@@ -186,6 +192,7 @@
   <br>
   <br>
   <p class="flex justify-center text-gray-500">Made with 💚 by Gymcar</p>
+  
   <br>
   {:else if $driver == '1'}
   <img src="/" alt="">
@@ -246,6 +253,9 @@
         <br>
         <br>
         <p class="flex text-gray-600 justify-center">Made with 💚 by Gymcar</p>
+        <div class="flex justify-center text-gray-600">
+          <button on:click={logOut}>Log Out</button>
+        </div>
         <br>
     </form>
     {/await}
@@ -296,6 +306,9 @@
           <br>
           <br>
           <p class="flex justify-center text-gray-700">Made with 💚 by Gymcar</p>
+          <div class="flex justify-center text-gray-600">
+            <button on:click={logOut}>Log Out</button>
+          </div>
 
       {:catch error }
         <p>Error fetching passengers: {error.message}</p>
