@@ -255,11 +255,9 @@
         {/each}
         <br>
         <dir class="flex justify-center" >
-          <!--<button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
-            Submit Times
+          <button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
+            <a href="/mycar">Pridať čas</a>
           </button>
-          -->
-          <a href="/a">Submit</a>
         </dir>
         <br>
         <br>
