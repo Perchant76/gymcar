@@ -29,7 +29,7 @@
 			const [key, value] = field
 			urlData[key]= value
     }
-    const response = await fetch('https://6api.perchant.dev/asdf/login/', {
+    const response = await fetch('https://6api.gymcar.pro/asdf/login/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
       body: new URLSearchParams(urlData)
@@ -51,7 +51,7 @@
   }
 
   async function getTimes() {
-    const response = await fetch(`https://6api.perchant.dev/asdf/gettime/index.php?route=${$route}`);
+    const response = await fetch(`https://6api.gymcar.pro/asdf/gettime/index.php?route=${$route}`);
     const data = await response.json();
       return data
     if (data.success) {
@@ -76,7 +76,7 @@
     }
 
     const responses = await Promise.all(stations.map(async (station) => {
-        const response = await fetch('https://6api.perchant.dev/asdf/settime/index.php', {
+        const response = await fetch('https://6api.gymcar.pro/asdf/settime/index.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -84,7 +84,7 @@
                 // Assuming $token is accessible
             },
             // Adjusting to send station name, time, and potentially other needed information
-            body: `station=${encodeURIComponent(station.stationName)}&time=${encodeURIComponent(station.time)}&spz=${encodeURIComponent($spz)}`,
+            body: `station=${encodeURIComponent(station.stationName)}&time=${encodeURIComponent(station.time)}&spz=${encodeURIComponent($spz)}&spz=${encodeURIComponent($incar)}`,
         });
 
         const responseData = await response.json();
@@ -99,7 +99,7 @@
 }
   // @ts-ignore
   async function getPassengers() {
-    const response = await fetch('https://6api.perchant.dev/asdf/getPassenger/index.php',{
+    const response = await fetch('https://6api.gymcar.pro/asdf/getPassenger/index.php',{
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({'home':$home})
@@ -125,7 +125,7 @@
     const data = { spz: spz, token: $token };
     incar.set('1');
     times.set(time)
-    const response = await fetch('https://6api.perchant.dev/asdf/setPassenger/index.php', {
+    const response = await fetch('https://6api.gymcar.pro/asdf/setPassenger/index.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `spz=${data.spz}&token=${data.token}`
@@ -214,10 +214,22 @@
     <br>
     <br>
     <form on:submit|preventDefault={setTimes}>
+      <div class="flex justify-center px-3 text-3xl">
+        <h2 class="px-4 text-white">Koľko máš volných miest</h2>
+      <select name="{$incar}" id="{$incar}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      </div>
+      <br>
+      <br>
       {#each stations.stations as station, i}
         <ul class="flex justify-center text-3xl">
           <label class="px-3 text-white " for={"selectTime"+ i}>{station}</label>
           <select id={"selectTime"+i} name={i +'_'+ station} >
+            <option value="nn">NEPRECHADZAM</option>
             <option value="6:00">6:00</option>
             <option value="6:10">6:10</option>
             <option value="6:20">6:20</option>
@@ -244,9 +256,11 @@
         {/each}
         <br>
         <dir class="flex justify-center" >
-          <button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
+          <!--<button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
             Submit Times
           </button>
+          -->
+          <a href="/a">Submit</a>
         </dir>
         <br>
         <br>
