@@ -155,7 +155,7 @@
 
 {#if $token == '' }
   <a href="https://gymzh.sk/projekty/Gymcar/gymcar.apk">
-  <div class="flex justify-center bg-lime-700 py-3">
+  <div class="flex justify-center py-3 bg-lime-700">
     <h1 class="text-4xl">Stiahnuť Android Apku</h1>
   </div>
 </a>
@@ -166,7 +166,7 @@
   <br>
   <br>
   <br>
-  <h1 class="text-5xl flex justify-center text-white">GYMCAR</h1>
+  <h1 class="flex justify-center text-5xl text-white">GYMCAR</h1>
   <br>
   <br>
   <br>
@@ -175,15 +175,15 @@
   <br>
   <br>
   <form class="flex flex-col px-10 sm:px-96" on:submit|preventDefault={handleLogin}>
-    <input class="mt-1 px-3 py-4 bg-black border text-white shadow-sm border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 block w-full rounded-md sm:text-sm focus:ring-1" name="username" type="text" bind:value={username} placeholder="Username" />
+    <input class="block w-full px-3 py-4 mt-1 text-white bg-black border rounded-md shadow-sm border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 sm:text-sm focus:ring-1" name="username" type="text" bind:value={username} placeholder="Username" />
     <br>
     <br>
     <br>
-    <input class="mt-1 px-3 py-4 bg-black border shadow-sm text-white border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 block w-full rounded-md sm:text-sm focus:ring-1" name="password" type="password" bind:value={password} placeholder="Password" />
+    <input class="block w-full px-3 py-4 mt-1 text-white bg-black border rounded-md shadow-sm border-lime-300 placeholder-lime-100 focus:outline-none focus:placeholder-lime-700 focus:ring-lime-700 sm:text-sm focus:ring-1" name="password" type="password" bind:value={password} placeholder="Password" />
     <br>
     <br>
     <br>
-    <button class="text-white bg-lime-700 rounded px-3 py-1 flex justify-center" type="submit">Login</button>
+    <button class="flex justify-center px-3 py-1 text-white rounded bg-lime-700" type="submit">Login</button>
   </form>
   <br>
   <br>
@@ -200,12 +200,12 @@
     <div class="flex justify-center ">
     <img class="w-20" src="/logo.png" alt="Logo">
   </div>
-  <h1 class="flex text-white justify-center text-5xl py-5">Vitaj Vodič </h1>
+  <h1 class="flex justify-center py-5 text-5xl text-white">Vitaj Vodič </h1>
   <br>
-    <h3 class="flex text-white justify-center text-4xl">Nastav čas</h3>
+    <h3 class="flex justify-center text-4xl text-white">Nastav čas</h3>
     <br>
     <br>
-    <p class="flex  text-white justify-center px-5">V tejto časti ku každej zastávke cez ktorú prechádzaš pridaj čas, počas ktorého budeš prechádzať cez toto miesto</p>
+    <p class="flex justify-center px-5 text-white">V tejto časti ku každej zastávke cez ktorú prechádzaš pridaj čas, počas ktorého budeš prechádzať cez toto miesto</p>
     <br>
     {#await getTimes()}
       <p>Loading</p>
@@ -215,8 +215,8 @@
     <br>
     <form on:submit|preventDefault={setTimes}>
       {#each stations.stations as station, i}
-        <ul class="flex  justify-center text-3xl">
-          <label class=" text-white px-3" for={"selectTime"+ i}>{station}</label>
+        <ul class="flex justify-center text-3xl">
+          <label class="px-3 text-white " for={"selectTime"+ i}>{station}</label>
           <select id={"selectTime"+i} name={i +'_'+ station} >
             <option value="6:00">6:00</option>
             <option value="6:10">6:10</option>
@@ -244,15 +244,15 @@
         {/each}
         <br>
         <dir class="flex justify-center" >
-          <button class="text-white bg-lime-700 rounded px-3 py-1 text-2xl" type="submit" >
+          <button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
             Submit Times
           </button>
         </dir>
         <br>
         <br>
         <br>
-        <p class="flex text-gray-600 justify-center">Made with 💚 by Gymcar</p>
-        <div class=" flex justify-center text-lime-700 text-xl rounded py-2">
+        <p class="flex justify-center text-gray-600">Made with 💚 by Gymcar</p>
+        <div class="flex justify-center py-2 text-xl rounded text-lime-700">
           <button on:click={logOut}>Log Out</button>
         </div>
         <br>
@@ -268,7 +268,7 @@
     <img class="w-20" src="/logo.png" alt="Logo">
   </div>
   <br>
-    <h1 class="flex  text-white justify-center text-5xl">Vyber si auto</h1>
+    <h1 class="flex justify-center text-5xl text-white">Vyber si auto</h1>
     {#if $incar == '1'}
     <br>
       <h1 class="flex justify-center text-2xl text-white">Tvoje auto bude na zastávke o:</h1>
@@ -277,7 +277,7 @@
       <br>
       <br>
       <div class="flex justify-center">
-        <button class="bg-lime-700 text-white rounded px-3 py-1" on:click={() => remPassenger()}>
+        <button class="px-3 py-1 text-white rounded bg-lime-700" on:click={() => remPassenger()}>
           Nechcem odviesť
         </button>
       </div>
@@ -285,17 +285,17 @@
 
     <ul>
       {#await getPassengers()}
-        <p class="flex justify-center text-7xl text-white">Loading passengers...</p>
+        <p class="flex justify-center text-white text-7xl">Loading passengers...</p>
       {:then passengers }
       <br>
       <br>
-        <h1 class="flex text-white justify-center text-3xl">{$home}</h1>
-        <p class="flex text-white justify-center">Tu si môžeš vybrať ktorým autom pôjdeš na základe času, ktorý ti vyhovuje, šoferá spoznáš podľa ŠPZ</p>
+        <h1 class="flex justify-center text-3xl text-white">{$home}</h1>
+        <p class="flex justify-center text-white">Tu si môžeš vybrať ktorým autom pôjdeš na základe času, ktorý ti vyhovuje, šoferá spoznáš podľa ŠPZ</p>
         <br>
           {#each passengers as passenger }
-            <li class="flex text-white justify-center text-3xl py-6 px-5">
+            <li class="flex justify-center px-5 py-6 text-3xl text-white">
               {passenger.spz} - {passenger.time}
-              <button class="bg-lime-700 text-white rounded px-3 py-1" on:click={() => setPassengers(passenger.spz, passenger.time)}>
+              <button class="px-3 py-1 text-white rounded bg-lime-700" on:click={() => setPassengers(passenger.spz, passenger.time)}>
                 Vybrať
               </button>
             </li>
@@ -306,7 +306,7 @@
           <br>
           <br>
           <p class="flex justify-center text-gray-700">Made with 💚 by Gymcar</p>
-          <div class=" flex justify-center text-lime-700 text-xl rounded py-2">
+          <div class="flex justify-center py-2 text-xl rounded text-lime-700">
             <button on:click={logOut}>Log Out</button>
           </div>
           <br>
