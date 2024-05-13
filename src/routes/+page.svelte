@@ -239,17 +239,16 @@
             <option value="7:00">7:00</option>
             <option value="7:10">7:10</option>
             <option value="7:20">7:20</option>
-            <option value="7:20">7:20</option>
-            <option value="7:30">7:20</option>
-            <option value="7:40">7:20</option>
-            <option value="7:50">7:20</option>
-            <option value="8:00">7:20</option>
-            <option value="8:10">7:20</option>
-            <option value="8:20">7:20</option>
-            <option value="8:30">7:20</option>
-            <option value="8:40">7:20</option>
-            <option value="8:50">7:20</option>
-            <option value="9:00">7:20</option>
+            <option value="7:30">7:30</option>
+            <option value="7:40">7:40</option>
+            <option value="7:50">7:50</option>
+            <option value="8:00">8:00</option>
+            <option value="8:10">8:10</option>
+            <option value="8:20">8:20</option>
+            <option value="8:30">8:30</option>
+            <option value="8:40">8:40</option>
+            <option value="8:50">8:50</option>
+            <option value="9:00">9:00</option>
           </select>
         </ul>
         <br>
