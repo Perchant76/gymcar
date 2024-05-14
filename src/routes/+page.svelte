@@ -5,6 +5,7 @@
   import Cookies from 'js-cookie'; // For URL encoding
   import {get, writable} from "svelte/store";
   import { persisted } from 'svelte-persisted-store'
+  import { redirect } from '@sveltejs/kit';
 
   let username = '';
   let password = '';
@@ -15,6 +16,7 @@
   let home = persisted('home', ''); // Assuming 'home' is part of login response
   let spz = persisted('spz', '');
   let incar = persisted('incar', '');
+  let selectNumber = '1';
   let times = persisted('times', '');
   let route = persisted('route', '');
   let stations = [];
@@ -49,6 +51,11 @@
       console.error('Login failed:', data.message || 'Unknown error');
     }
   }
+  
+  function handleSubmit(event) {
+        
+    }
+
 
   async function getTimes() {
     const response = await fetch(`https://6api.gymcar.pro/asdf/gettime/index.php?route=${$route}`);
@@ -64,39 +71,38 @@
 
   // @ts-ignore
   async function setTimes(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const stations = [];
-
-    for (let field of formData.entries()) {
-        // Splitting the key into index and station name, assuming the format is 'index_stationName'
-        const [index, stationName] = field[0].split('_');
-        const time = field[1];
-        stations.push({ index, stationName, time });
-    }
-
-    const responses = await Promise.all(stations.map(async (station) => {
-        const response = await fetch('https://6api.gymcar.pro/asdf/settime/index.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                // If your token is in a variable, ensure to include it correctly here
-                // Assuming $token is accessible
-            },
-            // Adjusting to send station name, time, and potentially other needed information
-            body: `station=${encodeURIComponent(station.stationName)}&time=${encodeURIComponent(station.time)}&spz=${encodeURIComponent($spz)}&spz=${encodeURIComponent($incar)}`,
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-            throw new Error('Failed to set time for station ' + station.stationName + ': ' + (responseData.message || 'Unknown error'));
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const stations = [];
+        // Extract stations and times from the form data
+        for (let field of formData.entries()) {
+            const [index, stationName] = field[0].split('_');
+            const time = field[1];
+            stations.push({ index, stationName, time });
         }
-        return responseData;
-    }));
 
-    // After all requests
-    console.log('All times set successfully:', responses);
-}
+        // Send a POST request for each station with the necessary data
+        const responses = await Promise.all(stations.map(async (station) => {
+            const response = await fetch('https://6api.gymcar.pro/asdf/settime/index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                // Encode and concatenate all necessary parameters into the request body
+                body: `station=${encodeURIComponent(station.stationName)}&time=${encodeURIComponent(station.time)}&spz=${encodeURIComponent($spz)}&incar=${encodeURIComponent(selectNumber)}&token=${encodeURIComponent($token)}`,
+            });
+
+            const responseData = await response.json();
+            // Handle response appropriately
+            if (!response.ok) {
+                throw new Error('Failed to set time for station ' + station.stationName + ': ' + (responseData.message || 'Unknown error'));
+            }
+            return responseData;
+        }));
+        window.location.href = '/mycar';
+        // Log the response from the server for all stations
+        console.log('All times set successfully:', responses);
+    }
   // @ts-ignore
   async function getPassengers() {
     const response = await fetch('https://6api.gymcar.pro/asdf/getPassenger/index.php',{
@@ -122,13 +128,13 @@
   }
   // @ts-ignore
   async function setPassengers(spz, time) {
-    const data = { spz: spz, token: $token };
+    const data = { spz: spz, token: $token, home: $home};
     incar.set('1');
     times.set(time)
-    const response = await fetch('https://6api.gymcar.pro/asdf/setPassenger/index.php', {
+    const response = await fetch('https://6api.gymcar.pro/asdf/setincar/index.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `spz=${data.spz}&token=${data.token}`
+      body: `spz=${data.spz}&token=${data.token}&home=${data.home}`
     });
 
     const responseData = await response.json();
@@ -137,6 +143,8 @@
       // Update UI to display selected passenger and time
     } else {
       // Handle error setting passenger
+      incar.set('0')
+      alert('Auto je plné')
       console.error('Failed to set passenger:', responseData.message || 'Unknown error');
     }
   }
@@ -216,12 +224,12 @@
     <form on:submit|preventDefault={setTimes}>
       <div class="flex justify-center px-3 text-3xl">
         <h2 class="px-4 text-white">Koľko máš volných miest</h2>
-      <select name="{$incar}" id="{$incar}">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+        <select name="numberSelect" bind:value={selectNumber}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
       </div>
       <br>
       <br>
@@ -229,7 +237,6 @@
         <ul class="flex justify-center text-3xl">
           <label class="px-3 text-white " for={"selectTime"+ i}>{station}</label>
           <select id={"selectTime"+i} name={i +'_'+ station} >
-            <option value="nn">NEPRECHADZAM</option>
             <option value="6:00">6:00</option>
             <option value="6:10">6:10</option>
             <option value="6:20">6:20</option>
@@ -256,13 +263,13 @@
         <br>
         <dir class="flex justify-center" >
           <button class="px-3 py-1 text-2xl text-white rounded bg-lime-700" type="submit" >
-            <a href="/mycar">Pridať čas</a>
+            Pridať čas
           </button>
         </dir>
         <br>
         <br>
         <br>
-        <p class="flex justify-center text-gray-600">Made with 💚 by Gymcar</p>
+        <p class="flex justify-center text-gray-600">Made with 💚 by GymCar</p>
         <div class="flex justify-center py-2 text-xl rounded text-lime-700">
           <button on:click={logOut}>Log Out</button>
         </div>
@@ -305,7 +312,7 @@
         <br>
           {#each passengers as passenger }
             <li class="flex justify-center px-5 py-6 text-3xl text-white">
-              {passenger.spz} - {passenger.time}
+              {passenger.spz} - {passenger.time} - {passenger.number}
               <button class="px-3 py-1 text-white rounded bg-lime-700" on:click={() => setPassengers(passenger.spz, passenger.time)}>
                 Vybrať
               </button>
@@ -316,7 +323,7 @@
           <br>
           <br>
           <br>
-          <p class="flex justify-center text-gray-700">Made with 💚 by Gymcar</p>
+          <p class="flex justify-center text-gray-700">Made with 💚 by GymCar</p>
           <div class="flex justify-center py-2 text-xl rounded text-lime-700">
             <button on:click={logOut}>Log Out</button>
           </div>
