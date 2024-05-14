@@ -4,7 +4,7 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "logo_512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -15,18 +15,18 @@
   "theme_color": "#4e525c",
   "shortcuts": [
     {
-      "name": "How's weather today?",
-      "short_name": "Today",
-      "description": "View weather information for today",
+      "name": "Ako ideš dnes do školy",
+      "short_name": "Gymcar App",
+      "description": "Dnes môžeš cestovať s GymCar",
       "url": "/today?source=pwa",
-      "icons": [{ "src": "/icons/logo_192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/logo_192.png", "sizes": "192x192" }]
     },
     {
-      "name": "How's weather tomorrow?",
-      "short_name": "Tomorrow",
-      "description": "View weather information for tomorrow",
+      "name": "Chceš cestovať?",
+      "short_name": "Gymcar App",
+      "description": "Kto ta vezie?",
       "url": "/tomorrow?source=pwa",
-      "icons": [{ "src": "/icons/logo_192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/logo_192.png", "sizes": "192x192" }]
     }
   ],
   "description": "Your polution free way of traveling with classmates"
