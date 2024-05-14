@@ -162,11 +162,6 @@
 </script>
 
 {#if $token == '' }
-  <a href="https://gymzh.sk/projekty/Gymcar/gymcar.apk">
-  <div class="flex justify-center py-3 bg-lime-700">
-    <h1 class="text-4xl">Stiahnuť Android Apku</h1>
-  </div>
-</a>
   <br>
     <div class="flex justify-center ">
     <img class="w-28" src="/logo.png" alt="Logo">
